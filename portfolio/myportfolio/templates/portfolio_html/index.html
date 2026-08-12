@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if intro %}{{ intro.logo_name }} | Portfolio{% else %}Portfolio{% endif %}</title>
+    <link rel="stylesheet" href="{% static 'portfolio/index.css' %}">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+    <div class="container">
+        <h1 class="logo">{% if intro %}{{ intro.logo_name }}{% else %}Portfolio{% endif %}</h1>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="/academic">Academics</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== HERO SECTION ===== -->
+<section id="home" class="hero">
+    <div class="container hero-content">
+
+        <!-- Left: Introduction -->
+        {% if intro %}
+        <div class="hero-text">
+            <h2>Hi, I'm <span>{{ intro.profile_name }}</span></h2>
+            <h3>{{ intro.role }}</h3>
+            <p>{{ intro.introduction }}</p>
+
+            <div class="hero-buttons">
+                <a href="#projects" class="btn">View Projects</a>
+                <a href="#contact" class="btn btn-outline">Contact Me</a>
+            </div>
+        </div>
+
+        <!-- Right: Profile Image -->
+        {% if intro.profile_image %}
+        <div class="hero-image">
+            <img src="{{ intro.profile_image.url }}" alt="Profile Photo">
+        </div>
+        {% endif %}
+        {% endif %}
+
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="about">
+    {% if intro and intro.AboutMe %}
+    <div class="intro">
+        <h2 class="section-title">About Me</h2>
+        <p>{{ intro.AboutMe }}</p>
+    </div>
+    {% endif %}
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills" class="skills">
+    <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+            {% if skill %}
+                {% for skill in skill %}
+                    {% if skill %}
+                    <div class="skill-card">
+                        {% if skill.icon %}
+                        <div class="icons">
+                            <i class="{{ skill.icon }}"></i>
+                        </div>
+                        {% endif %}
+                        <p>{{ skill.title }}</p>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects" class="projects">
+    <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+            {% if projects %}
+                {% for project in projects %}
+                <div class="project-card">
+
+                    <!-- Project Image -->
+                    {% if project.project_image %}
+                    <div class="project-image">
+                        <img src="{{ project.project_image.url }}" alt="{{ project.project_title }}">
+                    </div>
+                    {% endif %}
+
+                    <!-- Content -->
+                    <div class="project-content">
+                        <h3>{{ project.project_title }}</h3>
+                        <p>{{ project.project_description }}</p>
+
+                        <a href="{% url 'project' project.id %}" class="project-btn">
+                            View project →
+                        </a>
+                    </div>
+
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="contact">
+    <div class="container">
+        <h2 class="section-title">Contact Me</h2>
+
+        <form method="POST" action="{% url 'contact' %}" class="contact-form">
+            {% csrf_token %}
+            <input type="text" placeholder="Your Name" name="name">
+            <input type="email" placeholder="Your Email" name="email">
+            <textarea placeholder="Your Message" name="message"></textarea>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </div>
+</section>
+
+<!-- ===== SOCIAL LINKS ===== -->
+<section class="social-grid">
+    <div class="social-links">
+        {% if url_link and url_link.linkedin %}
+        <a href="{{ url_link.linkedin }}" target="_blank" class="linkedin">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+        {% endif %}
+        {% if url_link and url_link.github %}
+        <a href="{{ url_link.github }}" target="_blank" class="github">
+            <i class="fab fa-github"></i>
+        </a>
+        {% endif %}
+        {% if url_link and url_link.email %}
+        <a href="{{ url_link.email }}" class="email">
+            <i class="fas fa-envelope"></i>
+        </a>
+        {% endif %}
+        {% if url_link and url_link.whatsapp %}
+        <a href="#" class="whatsapp">
+            <i class="fas fa-envelope"></i>
+        </a>
+        {% endif %}
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+{% if intro and intro.footer %}
+<footer class="footer">
+    <p>@{{ intro.footer }}. All rights reserved.</p>
+</footer>
+{% endif %}
+
+</body>
+</html>

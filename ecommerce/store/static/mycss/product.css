@@ -1,0 +1,37 @@
+.product-container {
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.product-img {
+  width: 400px;
+  border-radius: 12px;
+}
+
+.product-info h1 {
+  font-size: 32px;
+}
+
+.product-info h2 {
+  color: green;
+}
+
+ul {
+  margin-top: 15px;
+}
+
+.btn-primary {
+  background: black;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.btn-outline {
+  border: 2px solid black;
+  padding: 12px 20px;
+}

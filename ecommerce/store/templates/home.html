@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrendHive | Home</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'mycss/home.css' %}">
+  <script src="{% static 'myjs/products.js' %}"defer></script>
+  <script src="{% static 'myjs/category.js' %}"defer></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="logo">
+        <div class="logo-icon">T</div>
+        TrendHive
+      </div>
+
+      <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">New Arrivals</a>
+        <a href="#">Categories</a>
+        <a href="#">Deals</a>
+        <a href="#">Contact</a>
+      </nav>
+
+      <!-- Updated CTA Buttons -->
+      <div class="nav-cta">
+        <button class="btn-outline">
+          🛒 Cart
+        </button>
+
+        <a href="{% url 'login' %}" class="btn-primary">
+          Login
+        </a>
+
+        <a> <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn-primary">Logout</button>
+</form></a>
+        
+       
+      </div>
+    </div>
+  </header>
+
+  <!-- Rest of your page (unchanged) -->
+  <main class="page">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          Fresh drops every day
+        </div>
+        <h1 class="hero-title">
+          Discover <span>next-gen</span> fashion & lifestyle.
+        </h1>
+        <p class="hero-subtitle">
+          Curated styles from top brands with instant discounts, free shipping,
+          and hassle-free returns.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary">Start shopping →</button>
+          <button class="btn-outline">View today’s deals</button>
+        </div>
+        <div class="hero-meta">
+          <span><span class="dot"></span> 2k+ products</span>
+          <span>★ 4.8/5 rating</span>
+          <span>Trusted by 50,000+ shoppers</span>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-card">
+          <div class="hero-image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
+              alt="Fashion shopping"
+              class="hero-image"
+            />
+            <div class="hero-tag">Weekend Sale • Up to 50% Off</div>
+            <div class="floating-card">
+              <strong>Today’s bestsellers</strong>
+              <span>Headphones, sneakers & smartwatches</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2>Shop by category</h2>
+          <p>Find exactly what you need across all departments.</p>
+        </div>
+      </div>
+
+      <div class="category-grid">
+        <article class="category">
+          <div class="category-inner">
+            <img
+              src="https://images.unsplash.com/photo-1505740106531-4243f3831c78?auto=format&fit=crop&w=700&q=80"
+              alt="Electronics"
+            />
+            <h3>Electronics</h3>
+            <span>Gadgets, audio & more</span>
+          </div>
+        </article>
+
+        <article class="category">
+          <div class="category-inner">
+            <img
+              src="https://images.unsplash.com/photo-1528701800489-20be9c7382a7?auto=format&fit=crop&w=700&q=80"
+              alt="Fashion"
+            />
+            <h3>Fashion</h3>
+            <span>Men • Women • Streetwear</span>
+          </div>
+        </article>
+
+        <article class="category">
+          <div class="category-inner">
+            <img
+              src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=700&q=80"
+              alt="Home decor"
+            />
+            <h3>Home & Decor</h3>
+            <span>Make your space cozy</span>
+          </div>
+        </article>
+
+        <article class="category">
+          <div class="category-inner">
+            <img
+              src="https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?auto=format&fit=crop&w=700&q=80"
+              alt="Sports"
+            />
+            <h3>Sports & Fitness</h3>
+            <span>Gear up and move</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2>Featured products</h2>
+          <p>Handpicked pieces trending with our shoppers.</p>
+        </div>
+        <button class="btn-outline">View all products</button>
+      </div>
+
+      <div class="products-grid">
+        <article class="product">
+          <div class="product-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=700&q=80"
+              alt="Smart headphones"
+            />
+            <div class="product-tag">Best seller</div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Noise-canceling headphones</h3>
+            <div class="product-meta">
+              <span class="price">$99</span>
+              <span class="rating">★ 4.7 • 320 reviews</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="product-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=700&q=80"
+              alt="Men's jacket"
+            />
+            <div class="product-tag">New</div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Classic bomber jacket</h3>
+            <div class="product-meta">
+              <span class="price">$75</span>
+              <span class="rating">★ 4.5 • 128 reviews</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="product-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80"
+              alt="Smart watch"
+            />
+            <div class="product-tag">Limited</div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Smart fitness watch</h3>
+            <div class="product-meta">
+              <span class="price">$120</span>
+              <span class="rating">★ 4.8 • 210 reviews</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="product-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80"
+              alt="Running shoes"
+            />
+            <div class="product-tag">-30%</div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Lightweight running sneakers</h3>
+            <div class="product-meta">
+              <span class="price">$60</span>
+              <span class="rating">★ 4.6 • 190 reviews</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <p>© 2025 TrendHive. All rights reserved.</p>
+      <div>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Support</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

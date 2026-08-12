@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic | {{ intro.logo_name }}</title>
+
+    <!-- CSS LINK -->
+    <link rel="stylesheet" href="{% static 'portfolio/academic.css' %}">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+    <div class="container">
+        <h1 class="logo">{{intro.logo_name}}</h1>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#results">Results</a></li>
+                <li><a href="#certificates">Certificates</a></li>
+                <li><a href="#resume">Resume</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== PAGE HEADER ===== -->
+<section class="page-header">
+    <div class="container">
+        <h2>Academic Details</h2>
+        <p>Education, results, certifications & resume</p>
+    </div>
+</section>
+
+<!-- ===== EDUCATION ===== -->
+<section id="education" class="section">
+    <div class="container">
+        <h3 class="section-title">Education</h3>
+
+        <div class="education-grid">
+            {% for education in academic_qualification %}
+            <div class="edu-card">
+                <h4>{{ education.degree_title }}</h4>
+
+                {% if education.degree_title == 'Secondary' %}
+                    <p>{{ education.board }}</p>
+                {% else %}
+                    <p>{{ education.department }}</p>
+                {% endif %}
+
+                <span>{{ education.start_year }} – {{ education.end_year }}</span><br>
+                <span>{{ education.institution_name }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== RESULTS ===== -->
+<section id="results" class="section alt-section">
+    <div class="container">
+        <h3 class="section-title">Academic Results</h3>
+        <div class="result-grid">
+            {% for result in academic_result %}
+            <div class="result-card">
+                <h4>Semester {{result.semester_number}}</h4>
+                <p>SGPA:{{result.SGPA_value}}</p>
+                <a href="{{ result.result_pdf.url }}"><button>view result</button></a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== CERTIFICATES ===== -->
+<section id="certificates" class="section">
+    <div class="container">
+        <h3 class="section-title">Certificates</h3>
+
+        <div class="certificate-grid">
+            {% for certificate in academic_certificate %}
+            <div class="certificate-card">
+                <span>{{ certificate.certificate_title }}</span>
+
+                {% if certificate.certificate_pdf %}
+                    <a href="{{ certificate.certificate_pdf.url }}" target="_blank">
+                        <button>View Certificate</button>
+                    </a>
+                {% else %}
+                    <button disabled style="opacity:0.5; cursor:not-allowed;">
+                        Not Uploaded
+                    </button>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== RESUME ===== -->
+<section id="resume" class="section alt-section">
+    <div class="container resume-box">
+        <h3 class="section-title">Resume</h3>
+        <p>You can view my latest resume here:</p>
+        <a href="{{ resume.resume_pdf.url }}" target="_blank" class="btn" >
+            View Resume
+        </a>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <p>© {{intro.footer}}. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

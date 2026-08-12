@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{project.project_title}} | Project</title>
+    <link rel="stylesheet" href="{% static 'portfolio/project.css' %}">
+</head>
+<body>
+
+<a href="/" class="back-link">
+    ← Home
+</a>
+
+<!-- ================= HERO ================= -->
+<header class="project-hero"
+{% if project.project_image %}
+    style="background-image: url('{{ project.project_image.url }}');"
+{% endif %}
+>
+    <div class="overlay">
+        <div class="container">
+            <h1>{{ project.project_title }}</h1>
+            <p class="subtitle">{{ project.highlights }}</p>
+        </div>
+    </div>
+</header>
+
+<!-- ================= OVERVIEW ================= -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Project Overview</h2>
+        <p>{{project.project_overview}}</p>
+    </div>
+</section>
+
+<!-- ================= TECH STACK ================= -->
+<section class="section alt-section">
+    <div class="container">
+        <h2 class="section-title">Technology Stack</h2>
+
+        <div class="tech-grid">
+            {% for tech in project.tech_stacks.all %}
+            <div class="tech-card">
+                <h4>{{ tech.title }}</h4>
+                <p>{{ tech.stack_list }}</p>
+            </div>
+            {% empty %}
+            <p>No tech stack added yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ================= CHALLENGES ================= -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Challenges</h2>
+        <p>{{project.project_challenges}}</p>
+    </div>
+</section>
+
+<!-- ================= ACTION BUTTONS ================= -->
+<section class="section alt-section">
+    <div class="container center">
+        <a href="{{project.github_link}}" class="btn github">Github Link</a>
+
+
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <p>© {{intro.footer}} | Project </p>
+</footer>
+
+</body>
+</html>
