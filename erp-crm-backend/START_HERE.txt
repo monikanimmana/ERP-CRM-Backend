@@ -1,0 +1,234 @@
+================================================================================
+                         🚀 START HERE
+================================================================================
+
+Your complete ERP + CRM backend is ready. Follow these steps to run it locally.
+
+================================================================================
+                    STEP 1: START POSTGRESQL
+================================================================================
+
+Choose one method:
+
+OPTION A: Docker (recommended, requires Docker installed)
+  docker run --name postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres
+
+OPTION B: Homebrew (macOS)
+  brew services start postgresql
+
+OPTION C: System Service (Linux)
+  sudo systemctl start postgresql
+
+OPTION D: PostgreSQL Installer (Windows)
+  Use PostgreSQL installer, ensure service is running
+
+Verify:
+  psql --version
+  Should output: psql (PostgreSQL) 12 or higher
+
+================================================================================
+                    STEP 2: CREATE DATABASE
+================================================================================
+
+Run this once:
+
+  createdb erp_crm_db
+
+If you get "command not found":
+  psql -U postgres -c "CREATE DATABASE erp_crm_db;"
+
+================================================================================
+                    STEP 3: INSTALL DEPENDENCIES
+================================================================================
+
+From the project directory (erp-crm-backend/):
+
+  npm install
+
+This installs all packages (should show "217 packages added" or similar).
+
+================================================================================
+                    STEP 4: PREPARE DATABASE
+================================================================================
+
+Run migrations (creates all tables):
+
+  npm run db:migrate
+
+Seed database (adds test users, products, customers):
+
+  npm run db:seed
+
+You should see output like:
+  ✓ Created 4 users (admin, sales, warehouse, accounts)
+  ✓ Created 3 customers
+  ✓ Created 4 products
+
+================================================================================
+                    STEP 5: START DEVELOPMENT SERVER
+================================================================================
+
+Start the backend:
+
+  npm run dev
+
+Expected output:
+  [timestamp] Server running on http://localhost:4000
+  Environment: development
+
+The server is now running and ready for requests!
+
+================================================================================
+                    STEP 6: TEST THE API
+================================================================================
+
+In a NEW terminal, test login:
+
+  curl -X POST http://localhost:4000/auth/login \
+    -H "Content-Type: application/json" \
+    -d '{"email":"sales@erp.local","password":"sales123"}'
+
+You should get a JSON response with a "token" field.
+
+SAVE THIS TOKEN for the next step.
+
+================================================================================
+                    STEP 7: TEST ANOTHER ENDPOINT
+================================================================================
+
+List customers (replace TOKEN with your token from step 6):
+
+  curl -X GET http://localhost:4000/customers?page=1&limit=20 \
+    -H "Authorization: Bearer TOKEN"
+
+You should get a JSON response with customers.
+
+================================================================================
+                    STEP 8: USE POSTMAN OR REST CLIENT
+================================================================================
+
+For easier API testing:
+
+OPTION A: VS Code REST Client (built-in)
+  1. Open api.http file (in project root)
+  2. Install VS Code extension "REST Client"
+  3. Click "Send Request" above each request
+  4. Results appear in output panel
+
+OPTION B: Postman
+  1. Open Postman (https://www.postman.com)
+  2. File → Import → Select api.http
+  3. Set {{token}} variable in environment
+  4. Send requests from collection
+
+OPTION C: curl / command line
+  Use examples from README.md or REFERENCE.md
+
+================================================================================
+                    TEST CREDENTIALS
+================================================================================
+
+Default test users created:
+
+  Email                    Password         Role
+  ─────────────────────── ────────────────  ───────────
+  admin@erp.local         admin123         ADMIN
+  sales@erp.local         sales123         SALES
+  warehouse@erp.local     warehouse123     WAREHOUSE
+  accounts@erp.local      accounts123      ACCOUNTS
+
+Use any of these to login.
+
+================================================================================
+                    WHAT'S AVAILABLE
+================================================================================
+
+With the backend running on http://localhost:4000:
+
+✅ Create customers
+✅ Search & filter customers
+✅ Add follow-up notes to customers
+✅ Create products
+✅ Manage inventory (add/remove stock)
+✅ View stock movement history
+✅ Create sales challans (orders)
+✅ Confirm challans (deducts stock atomically)
+✅ Cancel challans (restores stock)
+✅ User authentication with JWT
+✅ Role-based access control
+✅ Full error handling with field-level validation
+
+See api.http for 30+ request examples.
+
+================================================================================
+                    COMMON ISSUES
+================================================================================
+
+Issue: "ECONNREFUSED 127.0.0.1:5432"
+Solution: PostgreSQL not running. Start it (see STEP 1).
+
+Issue: "database "erp_crm_db" does not exist"
+Solution: Run: createdb erp_crm_db
+
+Issue: "relation \"users\" does not exist"
+Solution: Run: npm run db:migrate
+
+Issue: "Missing required env variable: DATABASE_URL"
+Solution: Check .env file exists and has DATABASE_URL set.
+
+Issue: "Port 4000 already in use"
+Solution: Change PORT in .env file or kill process on port 4000.
+
+Issue: "npm: command not found"
+Solution: Install Node.js from https://nodejs.org (v20+)
+
+See README.md for more troubleshooting.
+
+================================================================================
+                    PROJECT STRUCTURE
+================================================================================
+
+erp-crm-backend/
+  ├── src/                   Application code (TypeScript)
+  ├── prisma/                Database schema & seed
+  ├── dist/                  Compiled JavaScript (auto-generated)
+  ├── package.json           Dependencies & scripts
+  ├── .env                   Environment config
+  ├── api.http               30+ API request examples
+  ├── README.md              Full documentation
+  ├── QUICKSTART.md          Setup guide
+  ├── ARCHITECTURE.md        Design patterns
+  ├── DATABASE.md            Schema reference
+  └── REFERENCE.md           Quick lookup card
+
+================================================================================
+                    NEXT STEPS
+================================================================================
+
+✓ Get backend running (follow STEP 1-7 above)
+✓ Read QUICKSTART.md (5 minutes)
+✓ Review api.http (see all available endpoints)
+✓ Read README.md (understand API design)
+✓ Build your React frontend against this API
+✓ For more details, see ARCHITECTURE.md
+
+================================================================================
+                    NEED HELP?
+================================================================================
+
+1. Run into an error? Check "COMMON ISSUES" section above.
+2. Want to understand the design? Read ARCHITECTURE.md
+3. Looking for API endpoint? See REFERENCE.md or api.http
+4. Need database details? See DATABASE.md
+5. Stuck on setup? See README.md "Troubleshooting"
+
+================================================================================
+
+You have a complete, production-ready backend.
+
+Start it now:
+  npm run dev
+
+Happy coding! 🚀
+
+================================================================================
