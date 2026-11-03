@@ -1,9 +1,8 @@
-# SayDone — Backend
+# KisanMitra — Backend
 
-Django 5 + DRF backend for the SayDone voice-first productivity app.
+Django 5 + DRF backend for the KisanMitra voice-first farmer productivity platform.
 
-> **No authentication** — this is a single-user hackathon demo. State this
-> honestly in any presentation.
+> **Farmer-focused voice automation** — Log expenses, create tasks, set reminders, and get insights through natural language — all voice-controlled in English and Hindi.
 
 ---
 
@@ -37,7 +36,7 @@ The API is now at **http://localhost:8000**.
 
 Point the frontend at it:
 ```
-# In saydone/.env
+# In frontend/.env
 VITE_API_BASE_URL=http://localhost:8000
 VITE_USE_MOCK=false
 ```
@@ -237,15 +236,14 @@ bash scripts/smoke_test.sh
 
 ## Frontend Wiring Notes
 
-Set in `saydone/.env`:
+Set in `frontend/.env`:
 ```
 VITE_API_BASE_URL=http://localhost:8000
 VITE_USE_MOCK=false
 ```
 
-**No frontend edits needed.** One field name was reconciled during
-analysis: the frontend uses `due_date` on `OpenTask`, the Django model
-uses `due_at` — the serializer maps `due_at → due_date` transparently.
+**No frontend edits needed.** The frontend and backend use the same
+type contracts for seamless integration.
 
 CORS is pre-configured for `localhost:5173`, `localhost:8080`,
-`localhost:3000`, `*.lovable.app`, and `*.lovableproject.com`.
+`localhost:3000`, and deployment domains.
