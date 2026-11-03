@@ -50,28 +50,55 @@ npm run dev  # → http://localhost:5173
 - **Acting** → Perform actions
 - **Voice Out** → Speak confirmation
 
-### Core Features
-- 🌾 **Expense Tracking** - Log spending with categories
-- ✓ **Task Management** - Create and track tasks
-- 🔔 **Reminders** - Set time-based reminders
-- 📊 **Dashboard** - View spending analytics
-- 📧 **Email Summaries** - Get daily/weekly reports
-- 🎤 **100% Voice Controlled** - Hands-free operation
+## Core Features
+
+### Voice-First Interface
+- 🎤 **Real-time Speech Recognition** - English & Hindi support
+- 🔊 **Text-to-Speech Responses** - Instant voice feedback
+- 📊 **Live Transcripts** - See what the app understood
+- 📈 **Waveform Visualization** - Real-time mic level feedback
+
+### Smart Action Pipeline
+- **Voice In** → Capture and transcribe speech (300-800ms)
+- **Understanding** → AI processes intent (500-1500ms)
+- **Acting** → Save to database (200-400ms)
+- **Voice Out** → Speak confirmation (1-3s)
+
+### Farmer-Focused Features
+- 🌾 **Expense Tracking** - Log spending by category (Food, Transport, Medical, etc.)
+- ✓ **Task Management** - Create and track daily tasks
+- 🔔 **Smart Reminders** - Set reminders for important dates
+- 📊 **Spending Analytics** - View expenses by category with charts
+- 📧 **Daily Reports** - Get email summaries of activity
+- 🌐 **Bilingual** - Fully supports English and Hindi
+
+### Demo Mode
+- Built-in mock backend with zero external dependencies
+- Toggle "Demo ON/OFF" in top bar
+- Full voice functionality without backend
+- Seamless switch to real backend when ready
+
+### Real vs Simulated Transparency
+- Every action shows whether it's real (saved to DB) or simulated
+- Frontend honestly displays state to users
+- Graceful degradation when services unavailable
 
 ## API Endpoints
 
 | Method | Path | Description |
 |--------|------|-------------|
-| POST | `/api/voice/process` | Process voice command |
-| GET | `/api/dashboard` | Get dashboard data |
+| POST | `/api/voice/process` | Process voice command → actions + reply |
+| GET | `/api/dashboard` | Get dashboard metrics |
 | GET | `/api/expenses` | List expenses |
 | POST | `/api/expenses` | Create expense |
+| PATCH | `/api/expenses/{id}` | Update expense |
 | DELETE | `/api/expenses/{id}` | Delete expense |
-| GET | `/api/tasks` | List tasks |
+| GET | `/api/tasks` | List tasks & reminders |
 | POST | `/api/tasks` | Create task |
-| PATCH | `/api/tasks/{id}` | Update task |
+| PATCH | `/api/tasks/{id}` | Mark task done |
 | DELETE | `/api/tasks/{id}` | Delete task |
-| GET | `/api/health` | Health check |
+| GET | `/api/health` | Backend health check |
+| POST | `/api/demo/reset` | Reset demo data (backend only) |
 
 ## Technology Stack
 
@@ -147,13 +174,16 @@ cd backend && gunicorn config.wsgi
 3. Commit with meaningful messages
 4. Push and create a PR
 
-## Deployment
+## Backend Documentation
 
-See deployment guides in `/docs` for:
-- Docker setup
-- AWS deployment
-- GitHub Actions CI/CD
-- Database migrations
+See [backend/README.md](./backend/README.md) for:
+- Django REST API setup & deployment
+- LLM configuration (Gemini, OpenAI, Claude, or rules-based)
+- Voice processing pipeline architecture
+- Database models & migrations
+- Email integration setup
+- Testing & smoke tests
+- curl examples for all endpoints
 
 ---
 
